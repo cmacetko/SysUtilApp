@@ -29,8 +29,11 @@ import EncodeDecode from './components/EncodeDecode/index';
 import URLParser from './components/URLParser/index';
 import JWTDecoder from './components/JWTDecoder/index';
 import QRCodeGerador from './components/QRCodeGerador/index';
-import Base64ArquivoEncoder from './components/Base64ArquivoEncoder/index';
+import ImagemEncoder from './components/ImagemEncoder/index';
 import ImagemTrim from './components/ImagemTrim/index';
+import ConsultarSSL from './components/ConsultarSSL/index';
+import ConsultarPlaca from './components/ConsultarPlaca/index';
+import ConsultarCNPJ from './components/ConsultarCNPJ/index';
 
 function App() {
 
@@ -151,7 +154,7 @@ function App() {
                         <ListItemText primary={"QRCode / Gerador"} />
                     </ListItem>
                     </NavLink>
-					<NavLink to="/Base64ArquivoEncoder" exact={true} className={'link'}>
+					<NavLink to="/ImagemEncoder" exact={true} className={'link'}>
                     <ListItem button>
                         <ListItemIcon>
                             <HomeIcon />
@@ -165,6 +168,30 @@ function App() {
                             <HomeIcon />
                         </ListItemIcon>
                         <ListItemText primary={"Imagem Trim"} />
+                    </ListItem>
+                    </NavLink>
+					<NavLink to="/ConsultarSSL" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Consultar SSL"} />
+                    </ListItem>
+                    </NavLink>
+					<NavLink to="/ConsultarPlaca" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Consultar Placa"} />
+                    </ListItem>
+                    </NavLink>
+					<NavLink to="/ConsultarCNPJ" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Consultar CNPJ"} />
                     </ListItem>
                     </NavLink>
                 </List>
@@ -188,8 +215,11 @@ function App() {
 						<Route exact path="/URLParser"><URLParser /></Route>
 						<Route exact path="/JWTDecoder"><JWTDecoder /></Route>
 						<Route exact path="/QRCodeGerador"><QRCodeGerador /></Route>
-						<Route exact path="/Base64ArquivoEncoder"><Base64ArquivoEncoder /></Route>
-						<Route exact path="/ImagemTrim"><ImagemTrim /></Route>
+						<Route exact path="/ImagemEncoder"><ImagemEncoder /></Route>
+						<Route exact path="/ImagemTrim"><ImagemTrim /></Route>,
+						<Route exact path="/ConsultarSSL"><ConsultarSSL /></Route>
+						<Route exact path="/ConsultarPlaca"><ConsultarPlaca /></Route>
+						<Route exact path="/ConsultarCNPJ"><ConsultarCNPJ /></Route>
                         <Route component={Home} />
                     </Switch>
 

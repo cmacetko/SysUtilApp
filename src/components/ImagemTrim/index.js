@@ -5,6 +5,7 @@ import { FormControl, FormHelperText, Card, CardContent, Grid, InputLabel, MenuI
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
+import { useGlobalSpinnerUpdate } from '../../auxiliar/Spinner/GlobalSpinnerProvider';
 import * as copy from 'copy-to-clipboard';
 
 import ModTitle from '../../auxiliar/ModTitle';
@@ -18,6 +19,7 @@ export default function ImagemTrim() {
     const { openModAlert } = useModAlert();
 	const [ encodedFiles, setEncodedFiles ] = React.useState([]);
 	const [ errors, setErrors ] = React.useState([]);
+	const { setGlobalSpinnerState } = useGlobalSpinnerUpdate();
  
 	const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
 		
@@ -71,6 +73,17 @@ export default function ImagemTrim() {
 		acoes.Salvar(ObjImage.encoded, ObjImage.name);
 
     };
+	
+	React.useEffect(() => {
+		
+        if( filesSelected ) 
+		{
+			
+            setGlobalSpinnerState({ open: processing });
+			
+        }
+		
+    }, [filesSelected, processing, setGlobalSpinnerState]);
 	
 	const loading_render = () => {
 

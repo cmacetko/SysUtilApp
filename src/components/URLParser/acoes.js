@@ -1,7 +1,7 @@
 export function parseUrl(value) 
 {
 	
-    const fragments = new Map();
+    const fragments = {};
 
     if( !value ) 
 	{
@@ -14,13 +14,13 @@ export function parseUrl(value)
 		
         const url = new URL(value);
 
-        fragments.set('host', url.host);
-        fragments.set('protocol', url.protocol);
-        fragments.set('hash', url.hash);
-        fragments.set('origin', url.origin);
-        fragments.set('pathname', url.pathname);
-        fragments.set('port', url.port ? url.port : '<default>');
-        fragments.set('search', url.search);
+        fragments['host'] = url.host;
+        fragments['protocol'] = url.protocol;
+        fragments['hash'] = url.hash;
+        fragments['origin'] = url.origin;
+        fragments['pathname'] = url.pathname;
+        fragments['port'] = url.port ? url.port : '<default>';
+        fragments['search'] = url.search;
 		
     } catch (e) {
         
@@ -33,7 +33,7 @@ export function parseUrl(value)
 export function parseUrlParams(value)
 {
 	
-    const params = new Map();
+    const params = {};
 
     if( !value ) 
 	{
@@ -45,15 +45,33 @@ export function parseUrlParams(value)
     try {
 		
         const url = new URL(value);
-		
         const searchParams = url.searchParams;
 		
-        searchParams.forEach((value, key) => params.set(key, value));
+        searchParams.forEach((value, key) => {
+			
+			params[key] = value;
+			
+		});
 		
     } catch (e) {
 		
     }
 
     return params;
+	
+}
+
+export function monta_json(obj) 
+{
+	
+    try{
+		
+        return JSON.stringify(obj, null, 4);
+		
+    }catch (e){
+		
+        return e.toString();
+		
+    }
 	
 }

@@ -5,6 +5,7 @@ import { FormControl, FormHelperText, Card, CardContent, Grid, InputLabel, MenuI
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
+import { useGlobalSpinnerUpdate } from '../../auxiliar/Spinner/GlobalSpinnerProvider';
 import * as copy from 'copy-to-clipboard';
 
 import ModTitle from '../../auxiliar/ModTitle';
@@ -13,11 +14,12 @@ import useModAlert from '../../auxiliar/ModAlert/index'
 import * as acoes from './acoes';
 import * as funcoes from '../../auxiliar/funcoes'
 
-export default function Base64ArquivoEncoder() {
+export default function ImagemEncoder() {
     
     const { openModAlert } = useModAlert();
 	const [ encodedFiles, setEncodedFiles ] = React.useState([]);
 	const [ errors, setErrors ] = React.useState([]);
+	const { setGlobalSpinnerState } = useGlobalSpinnerUpdate();
  
 	const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
 		
@@ -61,7 +63,7 @@ export default function Base64ArquivoEncoder() {
 		var ObjImage = encodedFiles[idx];
 		
         copy.default(ObjImage.encoded, { format: 'text/plain' });
-
+		
     };
 
     const BtnSalvar = (idx) => {
@@ -71,6 +73,17 @@ export default function Base64ArquivoEncoder() {
         funcoes.SalvarTextoParaArquivo(ObjImage.encoded);
 
     };
+	
+	React.useEffect(() => {
+		
+        if( filesSelected ) 
+		{
+			
+            setGlobalSpinnerState({ open: processing });
+			
+        }
+		
+    }, [filesSelected, processing, setGlobalSpinnerState]);
 	
 	const loading_render = () => {
 
