@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 
 import ModAlertProvider from './auxiliar/ModAlert/Provider'
+import GlobalState from './auxiliar/GlobalState/Provider'
 
 import Home from './components/Home';
 import Sobre from './components/Sobre';
@@ -34,6 +35,8 @@ import ImagemTrim from './components/ImagemTrim/index';
 import ConsultarSSL from './components/ConsultarSSL/index';
 import ConsultarPlaca from './components/ConsultarPlaca/index';
 import ConsultarCNPJ from './components/ConsultarCNPJ/index';
+import GerarPessoa from './components/GerarPessoa/index';
+import GerarDados from './components/GerarDados/index';
 
 function App() {
 
@@ -194,11 +197,28 @@ function App() {
                         <ListItemText primary={"Consultar CNPJ"} />
                     </ListItem>
                     </NavLink>
+					<NavLink to="/GerarPessoa" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Gerar Pessoa"} />
+                    </ListItem>
+                    </NavLink>
+					<NavLink to="/GerarDados" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Gerar Dados"} />
+                    </ListItem>
+                    </NavLink>
                 </List>
                 </div>
                 </Drawer>
 
                 <ModAlertProvider>
+				<GlobalState>
 
                 <main className={'content'}>
                 <div className={'toolbar'} />
@@ -220,11 +240,14 @@ function App() {
 						<Route exact path="/ConsultarSSL"><ConsultarSSL /></Route>
 						<Route exact path="/ConsultarPlaca"><ConsultarPlaca /></Route>
 						<Route exact path="/ConsultarCNPJ"><ConsultarCNPJ /></Route>
+						<Route exact path="/GerarPessoa"><GerarPessoa /></Route>
+						<Route exact path="/GerarDados"><GerarDados /></Route>
                         <Route component={Home} />
                     </Switch>
 
                 </main>
                 
+				</GlobalState>
                 </ModAlertProvider>
 
             </div>

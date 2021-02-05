@@ -22,16 +22,15 @@ import * as acoes from './acoes';
 import * as funcoes from '../../auxiliar/funcoes'
 import { StyledTableCell, StyledTableRow, useStyles } from './css';
 
-export default function ConsultarCNPJ() {
+export default function GerarPessoa() {
     
 	const classes = useStyles();
 	
     const { openModAlert } = useModAlert();
 	
-	const [ Campos, setCampos ] = React.useState({ CNPJ: "" });
 	const [ Processado, setProcessado ] = React.useState(false);
 	const [ Falha, setFalha ] = React.useState({ Is: false, Msg: "" });
-	const [ Resultado, setResultado ] = React.useState({ CNPJ: "", Dados: {}, Json: "" });
+	const [ Resultado, setResultado ] = React.useState({ Dados: {}, Json: "" });
 	
 	const { setGlobalSpinnerState } = useGlobalSpinnerUpdate();
 		
@@ -50,37 +49,34 @@ export default function ConsultarCNPJ() {
 	
 	const BtnExecutar = () => {
 
-		if( Campos.CNPJ == "" ){
-			
-			openModAlert(true, "Preencha a CNPJ!", "error", 2000);
-			
-		}else{
-			
-			setGlobalSpinnerState({ open: true });
+		setGlobalSpinnerState({ open: true });
 
-			acoes.Executar(Campos.CNPJ)
-			.then(result => {
-				
-				setGlobalSpinnerState({ open: false });
-				setProcessado(true);
-				
-				setResultado({ CNPJ: Campos.CNPJ, Dados: funcoes.ObjectComplexToObjectSimple(result), Json: funcoes.ArrayToJson(result) });
-				setFalha({ Is: false, Msg: "" });
-				
-				console.log("-------");
-				console.log(funcoes.ObjectComplexToObjectSimple(result));
-				
-			})
-			.catch(error => {
-				
-				setGlobalSpinnerState({ open: false });		
-				setProcessado(true);
-				
-				setFalha({ Is: true, Msg: error });
+		console.log("Executar");
+		
+		acoes.Executar()
+		.then(result => {
 			
-			});
-
-		}
+			setGlobalSpinnerState({ open: false });
+			setProcessado(true);
+			
+			console.log("result");
+			console.log(result);
+			
+			setResultado({ Dados: result, Json: funcoes.ArrayToJson(result) });
+			setFalha({ Is: false, Msg: "" });
+			
+		})
+		.catch(error => {
+			
+			setGlobalSpinnerState({ open: false });		
+			setProcessado(true);
+			
+			console.log("error");
+			console.log(error);
+			
+			setFalha({ Is: true, Msg: error });
+		
+		});
 		
     };
 	
@@ -104,7 +100,58 @@ export default function ConsultarCNPJ() {
 		);
 
 	};
-	const Sucesso_Render = () => {
+	
+	const Info1_Render = (DadTitulo, DadList) => {
+
+		if( Falha.Is || !Processado )
+		{
+			
+			return null;
+			
+		}
+		
+		if( DadList === undefined )
+		{
+			
+			return null;
+			
+		}
+		
+		if( Object.keys(DadList).length == 0 )
+		{
+			
+			return null;
+			
+		}
+		
+		return (
+		<Card className={'p10 mt20'}>
+			<CardContent>
+					
+				<Typography gutterBottom align="center" variant="h5" component="h2">
+					{DadTitulo}
+				</Typography>
+				
+				<TableContainer component={Paper} className={'mt20'}>
+					<Table>
+						<TableBody>
+							{Object.keys(DadList).map((ret, idx) => (
+								<StyledTableRow key={idx}>
+									<StyledTableCell component="th" scope="row">{ret}</StyledTableCell>
+									<StyledTableCell>{DadList[ret]}</StyledTableCell>
+								</StyledTableRow>
+							))}	
+						</TableBody>
+					</Table>
+				</TableContainer>
+				
+			</CardContent>
+		</Card>
+		);
+
+	};
+	
+	const Info2_Render = () => {
 
 		if( Falha.Is || !Processado )
 		{
@@ -117,25 +164,6 @@ export default function ConsultarCNPJ() {
 		<Card className={'p10 mt20'}>
 			<CardContent>
 					
-				<Typography gutterBottom align="center" variant="h5" component="h2">
-					{Resultado.CNPJ}
-				</Typography>
-				
-				<TableContainer component={Paper} className={'mt20'}>
-					<Table>
-						<TableBody>
-							{Object.keys(Resultado.Dados).map((ret, idx) => (
-								<StyledTableRow key={idx}>
-									<StyledTableCell component="th" scope="row">{ret}</StyledTableCell>
-									<StyledTableCell>{Resultado.Dados[ret]}</StyledTableCell>
-								</StyledTableRow>
-							))}	
-						</TableBody>
-					</Table>
-				</TableContainer>
-				
-				<Divider />
-				
 				<SyntaxHighlighter language="json" style={docco} showLineNumbers={true} wrapLines={true} wrapLongLines={true} className={'formatted2 p20'}>
 					{Resultado.Json}
 				</SyntaxHighlighter>
@@ -158,29 +186,8 @@ export default function ConsultarCNPJ() {
     return ( 
         <div>
             
-            <ModTitle title="Consultar CNPJ" />
-			
-			<Divider />
-
-            <form noValidate autoComplete="off" className={'mt20'}>
-
-                <Grid container spacing={1}>
-					<Grid item xs={12}>
-
-                        <TextField
-                            label="CNPJ"
-                            multiline
-                            variant="outlined"
-                            fullWidth={true}
-                            value={Campos.CNPJ}
-                            onChange={(e) => setCampos({ ...Campos, CNPJ: e.target.value })}
-                        />
-
-                    </Grid>
-                </Grid>
-
-            </form>
-			
+            <ModTitle title="Gerar Pessoa" />
+						
 			<div className={'mt20 text-center'}>
 
 				<Divider className={'mb20'} />
@@ -191,7 +198,15 @@ export default function ConsultarCNPJ() {
 			
 			{Erro_Render()}
 			
-			{Sucesso_Render()}
+			{Info1_Render("Pessoa", Resultado.Dados.Pessoa)}
+			
+			{Info1_Render("Endereco", Resultado.Dados.Endereco)}
+			
+			{Info1_Render("Veiculo", Resultado.Dados.Veiculo)}
+			
+			{Info1_Render("CNH", Resultado.Dados.CNH)}
+			
+			{Info2_Render()}
 
         </div>
     )

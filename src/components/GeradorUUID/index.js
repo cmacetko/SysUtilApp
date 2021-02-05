@@ -13,7 +13,7 @@ import * as acoes from './acoes';
 import * as funcoes from '../../auxiliar/funcoes'
 
 export default function GeradorUUID() {
-    
+;
     const { openModAlert } = useModAlert();
     const { handleSubmit, errors, control } = useForm();
     const [ Resultado, setResultado ] = React.useState('');
@@ -32,7 +32,7 @@ export default function GeradorUUID() {
     };
 
     const onSubmit = (data) => {
-
+		
         setResultado(acoes.generate(data.version, data.quantity));
 
     };
@@ -43,7 +43,7 @@ export default function GeradorUUID() {
             <ModTitle title="UUID Generator" />
 			
 			<Divider />
-
+			
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className={'mt20'}>
 
                 <Grid container spacing={1}>

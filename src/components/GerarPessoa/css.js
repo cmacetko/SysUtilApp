@@ -3,7 +3,8 @@ import { makeStyles, TableCell, TableRow, withStyles } from "@material-ui/core";
 export const StyledTableCell = withStyles(() => ({
     body: {
         fontSize: 14,
-        whiteSpace: 'pre'
+        whiteSpace: 'normal',
+        wordBreak: 'break-word',
     },
 }))(TableCell);
 
