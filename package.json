@@ -1,0 +1,80 @@
+{
+  "name": "SysUtilApp",
+  "main": "app/main.js",
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "build": "gulp build",
+    "start": "gulp",
+    "dist": "gulp dist"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^25.3.0",
+    "electron": "7.2.4",
+    "electron-builder": "^20.39.0",
+    "electron-react-devtools": "^0.5.3",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-livereload": "^4.0.1",
+    "jest": "^25.3.0",
+    "react-test-renderer": "^16.8.6"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@material-ui/styles": "^4.11.3",
+    "@types/material-ui": "^0.21.7",
+    "clsx": "^1.1.1",
+    "copy-to-clipboard": "^3.3.1",
+    "crypto-js": "^4.0.0",
+    "electron-devtools-installer": "^3.1.1",
+    "electron-is-dev": "^1.1.0",
+    "ini": "^1.3.5",
+    "jimp": "^0.16.1",
+    "jwt-decode": "^3.1.2",
+    "material-ui": "^0.20.2",
+    "nodejs-base64-encode": "^1.1.0",
+    "qrcode": "^1.4.4",
+    "re-resizable": "^6.9.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-dropzone": "^11.3.0",
+    "react-helmet": "^6.1.0",
+    "react-hook-form": "^6.15.1",
+    "react-loading-overlay": "^1.0.1",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "react-syntax-highlighter": "^15.4.3",
+    "react-toast-notifications": "^2.4.0",
+    "redux": "^4.0.5",
+    "uuid": "^8.3.2"
+  },
+  "build": {
+    "appId": "com.ricardomansano.rectron",
+    "linux": {
+      "target": [
+        "dir"
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  }
+}
