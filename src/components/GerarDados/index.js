@@ -128,7 +128,7 @@ export default function GerarDados() {
             <form noValidate autoComplete="off" className={'mt20'}>
 
                 <Grid container spacing={1}>
-					<Grid item xs={6}>
+					<Grid item xs={4}>
 
                         <FormControl variant="outlined" fullWidth={true}>
                             <InputLabel>Tipo</InputLabel>
@@ -140,11 +140,37 @@ export default function GerarDados() {
                                 >
                                 <MenuItem value={'CPF'}>CPF</MenuItem>
                                 <MenuItem value={'CNPJ'}>CNPJ</MenuItem>
+								<MenuItem value={'CEP'}>CEP</MenuItem>
+								<MenuItem value={'LatLog'}>Latitude e Longitude</MenuItem>
+								<MenuItem value={'Email'}>E-mail</MenuItem>
+								<MenuItem value={'Usuario'}>Usuario</MenuItem>
+								<MenuItem value={'Url'}>Url</MenuItem>
+								<MenuItem value={'Dominio'}>Dominio</MenuItem>
+								<MenuItem value={'IP'}>IP</MenuItem>
+								<MenuItem value={'IPV6'}>IPv6</MenuItem>
+								<MenuItem value={'UserAgent'}>User Agent</MenuItem>
+								<MenuItem value={'MACAdreess'}>MAC Adreess</MenuItem>
+								<MenuItem value={'Senha'}>Senha</MenuItem>
+								<MenuItem value={'Telefone'}>Telefone</MenuItem>
+								<MenuItem value={'NumeroInteiro'}>Numero Inteiro</MenuItem>
+								<MenuItem value={'NumeroFlutuante'}>Numero Flutuante</MenuItem>
+								<MenuItem value={'MimeType'}>Mime Type</MenuItem>
+								<MenuItem value={'FileType'}>Tipo de Arquivo</MenuItem>
+								<MenuItem value={'Diretorio'}>Diretorio</MenuItem>
+								<MenuItem value={'ArquivoNome'}>Nome de Arquivo</MenuItem>
+								<MenuItem value={'Nome'}>Nome de Pessoa</MenuItem>
+								<MenuItem value={'EmpresaNome'}>Nome de Empresa</MenuItem>
+								<MenuItem value={'ProdutoNome'}>Nome de Produto</MenuItem>
+								<MenuItem value={'Ocupacao'}>Ocupacao</MenuItem>
+								<MenuItem value={'ProdutoDepartamento'}>Nome de Departamento</MenuItem>
+								<MenuItem value={'EnderecoBitcoin'}>Endereco Bitcoin</MenuItem>
+								<MenuItem value={'EnderecoEthereum'}>Endereco Ethereum</MenuItem>
+								<MenuItem value={'Cor'}>Cor Hexadecimal</MenuItem>
                             </Select>
                         </FormControl>
 
                     </Grid>
-					<Grid item xs={6}>
+					<Grid item xs={4}>
 
                         <FormControl variant="outlined" fullWidth={true}>
                             <InputLabel>Formatar</InputLabel>
@@ -176,6 +202,11 @@ export default function GerarDados() {
 								<MenuItem value={'30'}>30</MenuItem>
 								<MenuItem value={'40'}>40</MenuItem>
 								<MenuItem value={'50'}>50</MenuItem>
+								<MenuItem value={'100'}>100</MenuItem>
+								<MenuItem value={'150'}>150</MenuItem>
+								<MenuItem value={'200'}>200</MenuItem>
+								<MenuItem value={'250'}>250</MenuItem>
+								<MenuItem value={'500'}>500</MenuItem>
                             </Select>
                         </FormControl>
 

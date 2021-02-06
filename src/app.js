@@ -37,6 +37,9 @@ import ConsultarPlaca from './components/ConsultarPlaca/index';
 import ConsultarCNPJ from './components/ConsultarCNPJ/index';
 import GerarPessoa from './components/GerarPessoa/index';
 import GerarDados from './components/GerarDados/index';
+import ValidarDados from './components/ValidarDados/index';
+import ValidarBoleto from './components/ValidarBoleto/index';
+import PIX from './components/PIX/index';
 
 function App() {
 
@@ -213,6 +216,30 @@ function App() {
                         <ListItemText primary={"Gerar Dados"} />
                     </ListItem>
                     </NavLink>
+					<NavLink to="/ValidarDados" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Validar Dados"} />
+                    </ListItem>
+                    </NavLink>
+					<NavLink to="/ValidarBoleto" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Validar Boleto"} />
+                    </ListItem>
+                    </NavLink>
+					<NavLink to="/PIX" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"PIX"} />
+                    </ListItem>
+                    </NavLink>
                 </List>
                 </div>
                 </Drawer>
@@ -242,6 +269,9 @@ function App() {
 						<Route exact path="/ConsultarCNPJ"><ConsultarCNPJ /></Route>
 						<Route exact path="/GerarPessoa"><GerarPessoa /></Route>
 						<Route exact path="/GerarDados"><GerarDados /></Route>
+						<Route exact path="/ValidarDados"><ValidarDados /></Route>
+						<Route exact path="/ValidarBoleto"><ValidarBoleto /></Route>
+						<Route exact path="/PIX"><PIX /></Route>
                         <Route component={Home} />
                     </Switch>
 

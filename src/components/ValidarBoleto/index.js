@@ -22,19 +22,16 @@ import * as acoes from './acoes';
 import * as funcoes from '../../auxiliar/funcoes'
 import { StyledTableCell, StyledTableRow, useStyles } from './css';
 
-export default function ConsultarCNPJ() {
+export default function ValidarBoleto() {
     
 	const classes = useStyles();
 	
     const { openModAlert } = useModAlert();
 	
-	const [ Campos, setCampos ] = React.useState({ CNPJ: "" });
-	const [ Processado, setProcessado ] = React.useState(false);
+	const [ Campos, setCampos ] = React.useState({ Tipo: "LINHA_DIGITAVEL", Texto: "" });
 	const [ Falha, setFalha ] = React.useState({ Is: false, Msg: "" });
-	const [ Resultado, setResultado ] = React.useState({ CNPJ: "", Dados: {}, Json: "" });
+	const [ Resultado, setResultado ] = React.useState({ Dados: [], Json: "" });
 	
-	const { setGlobalSpinnerState } = useGlobalSpinnerUpdate();
-		
 	const BtnCopiar = () => {
 
         copy.default(Resultado.Json, { format: 'text/plain' });
@@ -49,41 +46,34 @@ export default function ConsultarCNPJ() {
     };
 	
 	const BtnExecutar = () => {
-
-		if( Campos.CNPJ == "" ){
+		
+		if( Campos.Texto == "" ){
 			
-			openModAlert(true, "Preencha a CNPJ!", "error", 2000);
+			openModAlert(true, "Preencha a Informacao a ser Validada!", "error", 2000);
 			
 		}else{
 			
-			setGlobalSpinnerState({ open: true });
+			var DadRet		= acoes.Executar(Campos.Tipo, Campos.Texto);
 
-			acoes.Executar(Campos.CNPJ)
-			.then(result => {
+			if( DadRet.sucesso == true )
+			{
 				
-				setGlobalSpinnerState({ open: false });
-				setProcessado(true);
-				
-				setResultado({ CNPJ: Campos.CNPJ, Dados: funcoes.ObjectComplexToObjectSimple(result), Json: funcoes.ArrayToJson(result) });
+				setResultado({ Dados: DadRet, Json: funcoes.ArrayToJson(DadRet) });
 				setFalha({ Is: false, Msg: "" });
-				
-			})
-			.catch(error => {
-				
-				setGlobalSpinnerState({ open: false });		
-				setProcessado(true);
-				
-				setFalha({ Is: true, Msg: error });
 			
-			});
-
-		}
+			}else{
+				
+				setFalha({ Is: true, Msg: DadRet.mensagem });
+				
+			}
 		
+		}
+
     };
 	
 	const Erro_Render = () => {
 
-		if( !Falha.Is || !Processado )
+		if( !Falha.Is )
 		{
 			
 			return null;
@@ -102,9 +92,25 @@ export default function ConsultarCNPJ() {
 
 	};
 	
-	const Sucesso_Render = () => {
+	const Info1_Render = () => {
 
-		if( Falha.Is || !Processado )
+		console.log(Resultado.Dados);
+		
+		if( Falha.Is )
+		{
+			
+			return null;
+			
+		}
+		
+		if( Resultado.Dados === undefined )
+		{
+			
+			return null;
+			
+		}
+		
+		if( Object.keys(Resultado.Dados).length == 0 )
 		{
 			
 			return null;
@@ -115,10 +121,6 @@ export default function ConsultarCNPJ() {
 		<Card className={'p10 mt20'}>
 			<CardContent>
 					
-				<Typography gutterBottom align="center" variant="h5" component="h2">
-					{Resultado.CNPJ}
-				</Typography>
-				
 				<TableContainer component={Paper} className={'mt20'}>
 					<Table>
 						<TableBody>
@@ -132,8 +134,39 @@ export default function ConsultarCNPJ() {
 					</Table>
 				</TableContainer>
 				
-				<Divider />
-				
+			</CardContent>
+		</Card>
+		);
+
+	};
+	
+	const Info2_Render = () => {
+
+		if( Falha.Is )
+		{
+			
+			return null;
+			
+		}
+		
+		if( Resultado.Dados === undefined )
+		{
+			
+			return null;
+			
+		}
+		
+		if( Object.keys(Resultado.Dados).length == 0 )
+		{
+			
+			return null;
+			
+		}
+		
+		return (
+		<Card className={'p10 mt20'}>
+			<CardContent>
+					
 				<SyntaxHighlighter language="json" style={docco} showLineNumbers={true} wrapLines={true} wrapLongLines={true} className={'formatted2 p20'}>
 					{Resultado.Json}
 				</SyntaxHighlighter>
@@ -156,8 +189,8 @@ export default function ConsultarCNPJ() {
     return ( 
         <div>
             
-            <ModTitle title="Consultar CNPJ" />
-			
+            <ModTitle title="Validar Boleto" />
+						
 			<Divider />
 
             <form noValidate autoComplete="off" className={'mt20'}>
@@ -165,31 +198,50 @@ export default function ConsultarCNPJ() {
                 <Grid container spacing={1}>
 					<Grid item xs={12}>
 
+                        <FormControl variant="outlined" fullWidth={true}>
+                            <InputLabel>Tipo</InputLabel>
+                                <Select
+                                label="Tipo"
+                                fullWidth={true}
+                                value={Campos.Tipo}
+                                onChange={(e) => setCampos({ ...Campos, Tipo: e.target.value })}
+                                >
+                                <MenuItem value={'LINHA_DIGITAVEL'}>Linha Digitavel</MenuItem>
+                                <MenuItem value={'CODIGO_DE_BARRAS'}>Codigo de Barras</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                    </Grid>
+                    <Grid item xs={12}>
+
                         <TextField
-                            label="CNPJ"
+                            label="Informacao do Boleto"
                             multiline
+                            rows={4}
                             variant="outlined"
                             fullWidth={true}
-                            value={Campos.CNPJ}
-                            onChange={(e) => setCampos({ ...Campos, CNPJ: e.target.value })}
+                            value={Campos.Texto}
+                            onChange={(e) => setCampos({ ...Campos, Texto: e.target.value })}
                         />
 
                     </Grid>
                 </Grid>
+				
+				<div className={'mt20 text-center'}>
+
+					<Divider className={'mb20'} />
+
+					<Button variant="contained" color="primary" onClick={(e) => BtnExecutar()}>Gerar</Button>
+
+				</div>
 
             </form>
 			
-			<div className={'mt20 text-center'}>
-
-				<Divider className={'mb20'} />
-
-				<Button variant="contained" color="primary" onClick={(e) => BtnExecutar()}>Consultar</Button>
-
-			</div>
-			
 			{Erro_Render()}
+
+			{Info1_Render()}
 			
-			{Sucesso_Render()}
+			{Info2_Render()}
 
         </div>
     )
