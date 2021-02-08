@@ -40,6 +40,10 @@ import GerarDados from './components/GerarDados/index';
 import ValidarDados from './components/ValidarDados/index';
 import ValidarBoleto from './components/ValidarBoleto/index';
 import PIX from './components/PIX/index';
+import GeoIP from './components/GeoIP/index';
+import NsLookup from './components/NsLookup/index';
+import Ping from './components/Ping/index';
+import Tracert from './components/Tracert/index';
 
 function App() {
 
@@ -240,6 +244,38 @@ function App() {
                         <ListItemText primary={"PIX"} />
                     </ListItem>
                     </NavLink>
+					<NavLink to="/GeoIP" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"GeoIP"} />
+                    </ListItem>
+                    </NavLink>
+					<NavLink to="/NsLookup" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"NsLookup"} />
+                    </ListItem>
+                    </NavLink>
+					<NavLink to="/Ping" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Ping"} />
+                    </ListItem>
+                    </NavLink>
+					<NavLink to="/Tracert" exact={true} className={'link'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Tracert"} />
+                    </ListItem>
+                    </NavLink>
                 </List>
                 </div>
                 </Drawer>
@@ -272,6 +308,10 @@ function App() {
 						<Route exact path="/ValidarDados"><ValidarDados /></Route>
 						<Route exact path="/ValidarBoleto"><ValidarBoleto /></Route>
 						<Route exact path="/PIX"><PIX /></Route>
+						<Route exact path="/GeoIP"><GeoIP /></Route>
+						<Route exact path="/NsLookup"><NsLookup /></Route>
+						<Route exact path="/Ping"><Ping /></Route>
+						<Route exact path="/Tracert"><Tracert /></Route>
                         <Route component={Home} />
                     </Switch>
 
