@@ -1,6 +1,7 @@
 {
   "name": "SysUtilApp",
   "main": "app/main.js",
+  "version": "1.0.0",
   "scripts": {
     "postinstall": "install-app-deps",
     "build": "gulp build",
@@ -14,7 +15,8 @@
     "@babel/preset-react": "^7.0.0",
     "babel-jest": "^25.3.0",
     "electron": "7.2.4",
-    "electron-builder": "^20.39.0",
+    "electron-builder": "^20.44.4",
+    "electron-packager": "^15.2.0",
     "electron-react-devtools": "^0.5.3",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
@@ -71,7 +73,7 @@
     "valid-url": "^1.0.9"
   },
   "build": {
-    "appId": "com.ricardomansano.rectron",
+    "appId": "com.cmacetko.sysutilapp",
     "linux": {
       "target": [
         "dir"

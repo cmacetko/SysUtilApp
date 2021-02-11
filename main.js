@@ -2,7 +2,7 @@ import { app, BrowserWindow, Menu, ipcMain, dialog, Tray, nativeImage, globalSho
 import * as fs from 'fs';
 import * as path from 'path';
 import url from 'url';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+//import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 const isMac = process.platform === 'darwin';
 
@@ -91,9 +91,9 @@ function loadApplication()
     }));
 
 
-    installExtension(REACT_DEVELOPER_TOOLS)
-    .then((name) => console.log(`Added Extension:  ${name}`))
-    .catch((err) => console.log('An error occurred: ', err));
+    //installExtension(REACT_DEVELOPER_TOOLS)
+    //.then((name) => console.log(`Added Extension:  ${name}`))
+    //.catch((err) => console.log('An error occurred: ', err));
 
     //win.webContents.openDevTools();
 
@@ -109,6 +109,94 @@ function setupMenu() {
             label: 'Gerador de UUID',
             click: () => getOrCreateWindow().webContents.send('navigateTo', '/GeradorUUID')
         }, 
+		{
+            label: 'Crypto / Hashing',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/CryptoHashing')
+        }, 
+		{
+            label: 'Crypto / HMAC',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/CryptoHMAC')
+        }, 
+		{
+            label: 'Crypto / Ciphers',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/CryptoCiphers')
+        }, 
+		{
+            label: 'Formatar JSON',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/FormatarJSON')
+        }, 
+		{
+            label: 'Encode / Decode',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/EncodeDecode')
+        }, 
+		{
+            label: 'URL Parser',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/URLParser')
+        }, 
+		{
+            label: 'JWT Decoder',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/JWTDecoder')
+        }, 
+		{
+            label: 'Gerar QRCode',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/QRCodeGerador')
+        }, 
+		{
+            label: 'Imagem Encoder',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/ImagemEncoder')
+        }, 
+		{
+            label: 'Imagem Trim',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/ImagemTrim')
+        }, 
+		{
+            label: 'Consultar SSL',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/ConsultarSSL')
+        }, 
+		{
+            label: 'Consultar Placa',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/ConsultarPlaca')
+        }, 
+		{
+            label: 'Consultar CNPJ',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/ConsultarCNPJ')
+        }, 
+		{
+            label: 'Gerar Pessoa',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/GerarPessoa')
+        }, 
+		{
+            label: 'Gerar Dados',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/GerarDados')
+        }, 
+		{
+            label: 'Validar Dados',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/ValidarDados')
+        }, 
+		{
+            label: 'Validar Boleto',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/ValidarBoleto')
+        }, 
+		{
+            label: 'PIX',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/PIX')
+        }, 
+		{
+            label: 'GeoIP',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/GeoIP')
+        }, 
+		{
+            label: 'NsLookup',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/NsLookup')
+        }, 
+		{
+            label: 'Ping',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/Ping')
+        }, 
+		{
+            label: 'Tracert',
+            click: () => getOrCreateWindow().webContents.send('navigateTo', '/Tracert')
+        },
         {
         type: 'separator'
         }, 
