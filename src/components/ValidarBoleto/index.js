@@ -94,8 +94,6 @@ export default function ValidarBoleto() {
 	
 	const Info1_Render = () => {
 
-		console.log(Resultado.Dados);
-		
 		if( Falha.Is )
 		{
 			

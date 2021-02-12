@@ -1,11 +1,19 @@
-import checksslcertificate from 'checksslcertificate'
+var checkSslCertificate = require('checksslcertificate').default
 
 export function Executar(Url)
 {
 	
+	console.log("Url");
+	console.log(Url);
+	
 	return new Promise((Resolve, Reject) => {
 
-		checksslcertificate({hostname: Url}).then(res => {
+		console.log("checkSslCertificate");
+	
+		checkSslCertificate({hostname: Url}).then(res => {
+		
+			console.log("res");
+			console.log(res);
 		
 			if( res.error )
 			{

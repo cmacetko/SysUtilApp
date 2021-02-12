@@ -8,8 +8,7 @@ export async function Executar()
 		try {
 
 			var leite = new Leite()
-			console.log(leite.pessoa.nome());
-			
+
 			var RetFinal = {
                             "Pessoa": {
 								"Nome": leite.pessoa.nome(),

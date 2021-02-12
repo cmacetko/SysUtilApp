@@ -74,7 +74,7 @@ export default function ConsultarSSL() {
 	
 	const Erro_Render = () => {
 
-		if( !Resultado.IsFalha || Object.keys(Resultado.Dados).length == 0 )
+		if( !Resultado.IsFalha || !Resultado.ErroMsg )
 		{
 			
 			return null;
@@ -160,7 +160,6 @@ export default function ConsultarSSL() {
 
                         <TextField
                             label="Url"
-                            multiline
                             variant="outlined"
                             fullWidth={true}
                             value={Campos.Url}

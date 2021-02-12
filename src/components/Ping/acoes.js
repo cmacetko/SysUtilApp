@@ -13,9 +13,6 @@ export function Executar(Valor, setProcessado, setFalha, Resultado, setResultado
 	ping.promise.probe(Valor)
 	.then(function (res) {
 				
-		console.log("then");
-		console.log(res);
-				
 		setProcessado(false);
 				
 		if( res.alive = false )
