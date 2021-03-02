@@ -2,12 +2,8 @@
   "name": "SysUtilApp",
   "main": "app/main.js",
   "version": "1.0.0",
-  "author": {
-    "name": "XXX",
-    "email": "xxx@gmail.com",
-    "url": "https://www.linkedin.com/in/xxxx/"
-  },
-  "description": "XXX",
+  "author": "Paloma Macetko <cmacetko@gmail.com>",
+  "description": "Kit de Utilitários para o dia a dia de um desenvolvedor web",
   "homepage": ".",
   "private": false,
   "scripts": {
