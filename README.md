@@ -45,8 +45,6 @@
 
 ![Printscreens](https://github.com/cmacetko/SysUtilApp/raw/main/img/4.png "Printscreens")
 
-![Printscreens](https://github.com/cmacetko/SysUtilApp/raw/main/img/5.png "Printscreens")
-
 ![Printscreens](https://github.com/cmacetko/SysUtilApp/raw/main/img/6.png "Printscreens")
 
 ![Printscreens](https://github.com/cmacetko/SysUtilApp/raw/main/img/7.png "Printscreens")
